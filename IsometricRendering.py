@@ -216,6 +216,7 @@ def main():
     player = Player()
     renderer = Renderer(WINDOW)
     running = True
+    renderGrid = True
 
     while running:
         for event in pygame.event.get():
@@ -227,6 +228,8 @@ def main():
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     sys.exit()
+                if event.key == pygame.K_RETURN:
+                    renderGrid = not renderGrid
 
         # Fill the window with a light blue color
         WINDOW.fill(LIGHT_BLUE)
@@ -234,7 +237,9 @@ def main():
         # Update player position and draw tiles and grid lines
         player.update()
         renderer.draw_tiles(player)
-        renderer.draw_grid_lines()
+
+        if renderGrid:
+            renderer.draw_grid_lines()
 
         # Update the display
         pygame.display.flip()
